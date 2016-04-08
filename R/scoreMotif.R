@@ -619,6 +619,11 @@ calculatePvalue <- function(results,
     stop('incorrect results format; please rerun analysis with filterp=TRUE')
   } else {
     pwmListmeta <- mcols(attributes(results)$motifs)
+    
+    if ( is.null(rownames(pwmListmeta)) ) {
+      rownames(pwmListmeta) <- with(pwmListmeta, paste(organism, dataSource, providerName, sep='-'))
+    }
+    
     pwmList <- attributes(results)$scoremotifs
     pvalues <- lapply(results, function(result, pwmList, pwmListmeta, bkg) {
                         pwm.id <- result$providerId
