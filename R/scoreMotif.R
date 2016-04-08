@@ -618,12 +618,7 @@ calculatePvalue <- function(results,
   if(!("scoreRef" %in% names(mcols(results)))) {
     stop('incorrect results format; please rerun analysis with filterp=TRUE')
   } else {
-    pwmListmeta <- mcols(attributes(results)$motifs)
-    
-    if ( is.null(rownames(pwmListmeta)) ) {
-      rownames(pwmListmeta) <- names(attributes(results)$motifs)
-    }
-    
+    pwmListmeta <- mcols(attributes(results)$motifs, use.names=TRUE)
     pwmList <- attributes(results)$scoremotifs
     pvalues <- lapply(results, function(result, pwmList, pwmListmeta, bkg) {
                         pwm.id <- result$providerId
