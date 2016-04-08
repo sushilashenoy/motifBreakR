@@ -621,7 +621,7 @@ calculatePvalue <- function(results,
     pwmListmeta <- mcols(attributes(results)$motifs)
     
     if ( is.null(rownames(pwmListmeta)) ) {
-      rownames(pwmListmeta) <- with(pwmListmeta, paste(organism, dataSource, providerName, sep='-'))
+      rownames(pwmListmeta) <- names(attributes(results)$motifs)
     }
     
     pwmList <- attributes(results)$scoremotifs
